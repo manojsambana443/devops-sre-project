@@ -1,0 +1,17 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: memory-app-gitops
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/manojsambana443/devops-sre-project.git
+    targetRevision: main
+    path: gitops/base
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: devops-sre
+  syncPolicy:
+    syncOptions:
+      - CreateNamespace=false

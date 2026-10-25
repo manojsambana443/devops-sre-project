@@ -8,7 +8,8 @@ WORKDIR /app
 RUN groupadd --system appgroup \
     && useradd --system --gid appgroup --no-create-home appuser
 
-COPY --chown=appuser:appgroup app/ /app/
+ARG APP_SOURCE=app
+COPY --chown=appuser:appgroup ${APP_SOURCE}/ /app/
 
 USER appuser:appgroup
 

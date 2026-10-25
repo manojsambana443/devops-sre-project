@@ -1,0 +1,21 @@
+
+apiVersion: v1
+kind: LimitRange
+metadata:
+  name: devops-sre-limits
+  namespace: devops-sre
+spec:
+  limits:
+    - type: Container
+      defaultRequest:
+        cpu: 100m
+        memory: 64Mi
+      default:
+        cpu: 500m
+        memory: 256Mi
+      max:
+        cpu: "2"
+        memory: 512Mi
+      min:
+        cpu: 50m
+        memory: 32Mi
