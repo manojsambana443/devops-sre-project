@@ -13,5 +13,7 @@ spec:
     server: https://kubernetes.default.svc
     namespace: devops-sre
   syncPolicy:
+    automated:
+      selfHeal: true
     syncOptions:
-      - CreateNamespace=false
+      - CreateNamespace=true
