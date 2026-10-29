@@ -1,0 +1,92 @@
+grafana:
+  admin:
+    existingSecret: monitoring-grafana
+    userKey: admin-user
+    passwordKey: admin-password
+
+  persistence:
+    enabled: false
+
+  resources:
+    requests:
+      cpu: 50m
+      memory: 128Mi
+    limits:
+      cpu: 300m
+      memory: 384Mi
+
+  grafana.ini:
+    smtp:
+      enabled: true
+      host: smtp.gmail.com:587
+      user: "$__env{GF_SMTP_USER}"
+      password: "$__env{GF_SMTP_PASSWORD}"
+      from_address: "$__env{GF_SMTP_FROM_ADDRESS}"
+      from_name: Grafana
+      startTLS_policy: MandatoryStartTLS
+
+  envValueFrom:
+    GF_SMTP_USER:
+      secretKeyRef:
+        name: grafana-smtp
+        key: user
+    GF_SMTP_PASSWORD:
+      secretKeyRef:
+        name: grafana-smtp
+        key: password
+    GF_SMTP_FROM_ADDRESS:
+      secretKeyRef:
+        name: grafana-smtp
+        key: from-address
+
+prometheus:
+  prometheusSpec:
+    retention: 24h
+    replicas: 1
+    storageSpec: {}
+    resources:
+      requests:
+        cpu: 100m
+        memory: 384Mi
+      limits:
+        cpu: 750m
+        memory: 1024Mi
+
+alertmanager:
+  enabled: true
+  alertmanagerSpec:
+    replicas: 1
+    resources:
+      requests:
+        cpu: 25m
+        memory: 64Mi
+      limits:
+        cpu: 150m
+        memory: 192Mi
+
+prometheusOperator:
+  resources:
+    requests:
+      cpu: 50m
+      memory: 128Mi
+    limits:
+      cpu: 300m
+      memory: 384Mi
+
+kube-state-metrics:
+  resources:
+    requests:
+      cpu: 25m
+      memory: 64Mi
+    limits:
+      cpu: 150m
+      memory: 192Mi
+
+prometheus-node-exporter:
+  resources:
+    requests:
+      cpu: 25m
+      memory: 32Mi
+    limits:
+      cpu: 100m
+      memory: 96Mi
