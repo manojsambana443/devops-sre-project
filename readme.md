@@ -845,3 +845,76 @@ Overall, this project strengthened my practical understanding of containerizatio
 
 - **GitHub Repository:** https://github.com/manojsambana443/devops-sre-project
 - **Docker Hub:** https://hub.docker.com/r/smk135/memory-app
+
+
+---
+
+# Project Implementation Evidence
+
+The following screenshots demonstrate the implementation and working state of the project's CI/CD pipeline, container registry, Kubernetes deployments, GitOps workflow, monitoring, centralized logging, and alerting.
+
+## 1. CI/CD Pipeline and Container Registry
+
+### GitHub Actions – Code Quality and Security Scanning
+
+![GitHub Actions code quality and SAST](screenshots/01-github-actions-code-quality-sast.png)
+
+### Docker Hub – Published Container Images
+
+![Docker Hub published images](screenshots/02-dockerhub-published-images.png)
+
+## 2. Kubernetes Deployment and Resource Management
+
+### Kubernetes Deployments
+
+![Kubernetes deployments](screenshots/03-kubernetes-deployments.png)
+
+### Kubernetes Pods
+
+![Kubernetes pods status](screenshots/04-kubernetes-pods-status.png)
+
+### Kubernetes Services
+
+![Kubernetes services](screenshots/05-kubernetes-services.png)
+
+### Resource Requests and Limits
+
+![Kubernetes resource limits](screenshots/06-kubernetes-resource-limits.png)
+
+### OOMKilled Demonstration
+
+![Kubernetes OOMKilled demonstration](screenshots/07-kubernetes-oomkilled.png)
+
+## 3. GitOps with Argo CD
+
+### Argo CD Application Overview
+
+![Argo CD application overview](screenshots/08-argocd-application-overview.png)
+
+## 4. Monitoring and Observability
+
+### Prometheus Targets
+
+![Prometheus targets](screenshots/09-prometheus-targets.png)
+
+### Grafana Monitoring Dashboard
+
+![Grafana monitoring dashboard](screenshots/10-grafana-monitoring-dashboard.png)
+
+### Additional Grafana Dashboard
+
+![Additional Grafana dashboard](screenshots/11-grafana-additional-dashboard.png)
+
+## 5. Centralized Logging and Alerting
+
+### Centralized Logging with Loki
+
+![Loki centralized logging](screenshots/12-loki-centralized-logging.png)
+
+### Grafana Alert – Firing
+
+![Grafana alert firing](screenshots/13-grafana-alert-firing.png)
+
+### Grafana Alert – Resolved
+
+![Grafana alert resolved](screenshots/14-grafana-alert-resolved.png)
