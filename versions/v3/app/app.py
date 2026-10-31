@@ -1,18 +1,19 @@
 
-import time
+import json
 import logging
 import sys
 import threading
-import json
+import time
 from http.server import BaseHTTPRequestHandler, HTTPServer
 
 APP_VERSION = "v3"
 
 logging.basicConfig(
     level=logging.INFO,
-    format="%(asctime)s - %(levelname)s - %(message)s",
-    stream=sys.stdout,
+    format="%(asctime)s - %(name)s - %(levelname)s - %(message)s",
+    handlers=[logging.StreamHandler(sys.stdout)],
 )
+
 logger = logging.getLogger("memory-app")
 
 
@@ -23,13 +24,11 @@ class HealthCheckHandler(BaseHTTPRequestHandler):
                 "status": "healthy",
                 "version": APP_VERSION,
             }
-            body = json.dumps(response).encode("utf-8")
 
             self.send_response(200)
             self.send_header("Content-Type", "application/json")
-            self.send_header("Content-Length", str(len(body)))
             self.end_headers()
-            self.wfile.write(body)
+            self.wfile.write(json.dumps(response).encode("utf-8"))
         else:
             self.send_response(404)
             self.end_headers()
@@ -58,7 +57,7 @@ def main():
     try:
         data.append(bytearray(100 * 1024 * 1024))
         logger.info("Allocated initial 100 MiB")
-    except Exception:
+    except MemoryError:
         logger.exception("Failed to allocate initial memory")
         return
 
@@ -81,11 +80,9 @@ def main():
                 )
 
             time.sleep(1)
+
         except MemoryError:
             logger.exception("OOM limit exceeded or MemoryError caught")
-            break
-        except Exception:
-            logger.exception("Unexpected application error")
             break
 
 
